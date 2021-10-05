@@ -1,0 +1,33 @@
+<div class="create_form"><br>
+    <a class="btn btn-primary create_form_1" routerLink="/Bfx">Add</a>
+    <h2 style="text-align: center;">View Business Details</h2>
+</div>
+
+<table class="table" id='tab'>
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Action</th>
+    </tr>
+  
+      <tr *ngFor="let tag of tags;">
+            <td>{{ tag.id }}</td>
+            <td>{{ tag.name }}</td>
+            <td>{{ tag.email }}</td>
+            <td>{{ tag.phone }}</td>
+            <td>
+                <a class="btn btn-primary" routerLink="/Bfx-edit/{{ tag.id }}">Edit</a>&nbsp;
+                <button  type="button" class="btn btn-danger" (click)="delete(tag.id)">
+                    Delete
+                </button>&nbsp;
+  
+            </td>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>

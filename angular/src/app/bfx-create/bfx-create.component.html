@@ -1,0 +1,184 @@
+<div class="create_form"><br>
+  <a class="btn btn-primary create_form_1" routerLink="/Bfx-Detail">View</a>
+  <h2 style="text-align: center;">{{this.id ? 'Edit Business Details' : 'Add New Business'}}</h2>
+</div>
+
+<form [formGroup]="BfxForm" (ngSubmit)="onSubmit()">
+<div class="container">
+  <div class="row">
+     <div class="col mb-3">
+        <label for="f_name" class="form-label"><b>Name</b></label>
+        <input type="text"formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" id="name" placeholder="Name" required>
+        <div *ngIf="BfxForm.controls['name'].invalid && (BfxForm.controls['name'].dirty || BfxForm.controls['name'].touched)" class="alert alert-danger">
+           <div>
+              Name is required.
+           </div>
+        </div>
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+           <div *ngIf="f.name.errors.required">Name is required</div>
+        </div>
+     </div>
+
+     <div class="col mb-3">
+        <label for="Email" class="form-label"><b>Email</b></label>
+        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="email" placeholder="Email">
+        <div *ngIf="BfxForm.controls['email'].invalid && (BfxForm.controls['email'].dirty || BfxForm.controls['email'].touched)" class="alert alert-danger">
+           <div>
+              Email is required.
+           </div>
+        </div>
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+           <div *ngIf="f.email.errors.required">Email is required</div>
+           <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+     </div>
+
+     <div class="col mb-3">
+        <label for="phone" class="form-label"><b>Phone</b></label>
+        <input type="text" formControlName="phone" (keypress)="numberOnly($event)"  maxlength="10"  [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" class="form-control"  id="phone" placeholder="Phone">
+        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+           <div *ngIf="f.phone.errors.required">Phone is required</div>
+        </div>
+     </div>
+  </div>
+  
+  <div class="row">
+     <div class="col mb-3">
+        <label for="website" class="form-label"><b>Website</b></label>
+        <input type="text" formControlName="website" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.website.errors }" id="website" placeholder="website">
+        <div *ngIf="BfxForm.controls['website'].invalid && (BfxForm.controls['website'].dirty || BfxForm.controls['website'].touched)" class="alert alert-danger">
+           <div>
+              Website is required.
+           </div>
+        </div>
+        <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
+           <div *ngIf="f.website.errors.required">Website is required</div>
+        </div>
+     </div>
+
+     <div class="col mb-3">
+        <label for="married" class="form-label"><b>Contact Name</b></label>
+        <input type="text" formControlName="contact_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact_name.errors }" id="contact_name" placeholder="Contact Name">
+        <div *ngIf="BfxForm.controls['contact_name'].invalid && (BfxForm.controls['contact_name'].dirty || BfxForm.controls['contact_name'].touched)" class="alert alert-danger">
+           <div>
+              Contact Name is required.
+           </div>
+        </div>
+        <div *ngIf="submitted && f.contact_name.errors" class="invalid-feedback">
+           <div *ngIf="f.contact_name.errors.required">Contact Name is required</div>
+        </div>
+     </div>
+
+     <div class="col mb-3">
+        <label for="married" class="form-label"><b>Contact Phone</b></label>
+        <input type="text" formControlName="contact_phone" (keypress)="numberOnly($event)"  maxlength="10" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact_phone.errors }" id="contact_phone" placeholder="Contact Phone">
+        <div *ngIf="BfxForm.controls['contact_phone'].invalid && (BfxForm.controls['contact_phone'].dirty || BfxForm.controls['contact_phone'].touched)" class="alert alert-danger">
+           <div>
+              Contact phone is required.
+           </div>
+        </div>
+        <div *ngIf="submitted && f.contact_phone.errors" class="invalid-feedback">
+           <div *ngIf="f.contact_phone.errors.required">Contact Phone is required</div>
+        </div>
+     </div>
+  </div>
+
+  <div class="row">
+     <div class="col mb-3">
+        <label for="married" class="form-label"><b>Contact Email</b></label>
+        <input type="email" formControlName="contact_email" [ngClass]="{ 'is-invalid': submitted && f.contact_email.errors }" class="form-control" id="contact_email" placeholder="Contact Email">
+        <div *ngIf="submitted && f.contact_email.errors" class="invalid-feedback">
+           <div *ngIf="f.contact_email.errors.required">Contact Email is required</div>
+           <div *ngIf="f.contact_email.errors.email">Email must be a valid email address</div>
+        </div>
+     </div>
+
+     <div class="col mb-3">
+        <label class="customcheck"><b>Type</b><br>
+        <input type="radio" formControlName="type" value="small_business">&nbsp;Small Business
+        <input type="radio" formControlName="type" value="enterprise">&nbsp;Enterprise
+        <input type="radio" formControlName="type" value="entrepreneur">&nbsp;Entrepreneur
+        <span class="checkmark"></span>
+        </label>
+     </div>
+
+     <div class="col mb-3">
+        <label class="customcheck"><b>Category</b></label><br>
+        <select class="form-control" [ngClass]="{ 'is-invalid': submitted && f.category.errors }"  multiple formControlName="category" aria-label="multiple select example">
+           <option selected>Select Category</option>
+           <option value="Clothes">Clothes</option>
+           <option value="Toys">Toys</option>
+           <option value="Groceries">Groceries</option>
+           <option value="Electronics">Groceries</option>
+           <option value="Digital">Digital</option>
+        </select>
+
+        <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+          <div *ngIf="f.category.errors.required">Select One Category</div>
+       </div>
+     </div>
+
+  </div>
+
+  <div class="row">
+     <div class="col mb-3">
+        <label for="commission_percentege" class="form-label"><b>Commission Percentege</b></label>
+        <input type="number" formControlName="commission_percentege" class="form-control" id="email" placeholder="Commission Percentege">
+     </div>
+
+     <div class="col mb-3">
+        <label for="active_from" class="form-label"><b>Active From</b></label>
+        <input type="date" formControlName="activate_from" class="form-control" id="email" placeholder="Active From">
+     </div>
+
+     <div class="col mb-3">
+        <label for="married" class="form-label"><b>Notes</b></label>
+        <textarea id="w3review" formControlName="notes" class="form-control" placeholder="Enter Notes" rows="2" cols="3">
+        </textarea>
+     </div>
+  </div>
+
+  <div class="row">
+     <div class="col mb-3">
+        <label for="commission_percentege" class="form-label"><b>Critical Account</b></label>
+        <div class="form-check">
+           <input mdbCheckbox class="form-check-input" formControlName="critical_account" type="checkbox"value="1" id="flexCheckDefault"/>
+           <label class="form-check-label" for="flexCheckDefault">
+           Cash on Delievery
+           </label>
+        </div>
+     </div>
+
+     <div class="col mb-3">
+        <label for="commission_percentege" class="form-label"><b>Payment Options</b></label>
+        <div class="form-check">
+           <input mdbCheckbox class="form-check-input"  type="checkbox" [checked]="payment_method_type.includes('Cash_on_Delievery')" (change)="ChangeCheckbox($event)" value="Cash_on_Delievery" id="flexCheckDefault"/>
+           <label class="form-check-label" for="flexCheckDefault">
+           Cash on Delievery
+           </label>
+        </div>
+
+        <div class="form-check">
+           <input mdbCheckbox class="form-check-input" type="checkbox" [checked]="payment_method_type.includes('UPI')" (change)="ChangeCheckbox($event)" value="UPI" id="flexCheckDefault"/>
+           <label class="form-check-label" for="flexCheckDefault">
+           UPI
+           </label>
+        </div>
+        <div class="form-check">
+           <input
+              mdbCheckbox class="form-check-input "type="checkbox" [checked]="payment_method_type.includes('CardPayment')" (change)="ChangeCheckbox($event)" value="CardPayment" id="flexCheckChecked"/>
+           <label class="form-check-label" for="flexCheckChecked">
+           Card Payment
+           </label>
+        </div>
+     </div>
+
+     <div class="col mb-3">
+     </div>
+  </div>
+
+  <div class="col row" style="    display: flex; justify-content: center;">
+     <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</div>
+</form>
